@@ -111,8 +111,7 @@ use Fisharebest\Webtrees\Module\ModuleCustomTrait;
 use Fisharebest\Webtrees\Module\ModuleMenuInterface;
 use Fisharebest\Webtrees\View;
 use SebastianBergmann\Type\VoidType;
-use HuHwt\WebtreesMods\TAMchart\TAMchart;
-use HuHwt\WebtreesMods\Module\TAMchart\TAMchartMod;
+// use HuHwt\WebtreesMods\TAMchart\TAMaction;
 
 // control functions
 use function app;
@@ -493,7 +492,7 @@ class ClippingsCartModuleEnhanced20 extends ClippingsCartModule
             'javascript'  => $this->assetUrl('js/cce.js'),
         ]);
     }
-
+ 
     /**
      * tbd: show options only if they will add new elements to the clippings cart otherwise grey them out
      * tbd: indicate the number of records which will be added by a button
@@ -811,10 +810,10 @@ class ClippingsCartModuleEnhanced20 extends ClippingsCartModule
     {
         //dependency check
         if (!$this->huhwttam_checked) {
-            $ok = class_exists("HuHwt\WebtreesMods\TAMchart\TAMchart", true);
+            $ok = class_exists("HuHwt\WebtreesMods\TAMchart\TAMaction", true);
             if (!$ok) {
                 $wttam_link = '(https://github.com/huhwt/huhwt-wttam)';
-                $wttam_missing = I18N::translate('Missing dependency - Install huhwt/huhwt-wttam!');
+                $wttam_missing = I18N::translate('Missing dependency - Install %s!', 'TAM'); // EW.H - Mod ... make warning
                 $theMessage = $wttam_missing . ' -> ' . $wttam_link;
                 FlashMessages::addMessage($theMessage);
             }
@@ -1029,8 +1028,10 @@ class ClippingsCartModuleEnhanced20 extends ClippingsCartModule
                 //Save the JSON string to SessionStorage.
                 Session::put('wt2TAMgedcom', $encodedString);
                 Session::put('wt2TAMaction', 'wt2TAMgedcom');
+                // Switch over to TAMaction-Module
+                // TODO : 'module' is hardcoded - how to get the name from foreign PHP-class 'TAMaction'?
                 $url = route('module', [
-                    'module' => $this->name(),
+                    'module' => '_huhwt-wttam_',
                     'action' => 'TAM',
                     'actKey' => 'wt2TAMaction',
                     'tree'   => $tree->name(),
@@ -1054,73 +1055,6 @@ class ClippingsCartModuleEnhanced20 extends ClippingsCartModule
      * the action is managed by some javascript and a href opening the TAM-subsystem
      *
      * @param ServerRequestInterface $request
-     *
-     * @return ResponseInterface
-     */
-    public function getTAMAction(ServerRequestInterface $request): ResponseInterface
-    {
-        $tree = $request->getAttribute('tree');
-        assert($tree instanceof Tree);
-
-        $params = (array) $request->getQueryParams();
-        $actKey = $params['actKey'] ?? '';
-
-        $title = I18N::translate('TAM Launch');
-        $label = I18N::translate('Key to retrieve data');
-
-        // the path to TAM-subsystem - pure javascript, no php, therefore the dot in module designation
-        $TAMpath = e(asset('snip/'));
-        $TAMpath = str_replace("/public/snip/", "", $TAMpath) . "/modules_v4/huhwt-tam.system/index-dev.html";
-
-        // we don't want to transfer gedcom directly - prepare url for AJAX call
-        $urlAJAX = [];
-        $urlAJAX['module'] = $this->name();
-        $urlAJAX['action'] = 'Gedcom';
-        $urlAJAX['actKey'] = $actKey;
-        $urlAJAX['tree']   = $tree->name();
-
-        // we habe two slots of javascript
-        $jsImp[] = $this->assetUrl('js/TAMchart.js');
-        $jsImp[] = $this->assetUrl('js/cce.js');
-
-        return $this->viewResponse($this->name() . '::' . 'TAMaction', [
-            'module'         => $this->name(),
-            'actKey'         => $actKey,
-            'title'          => $title,
-            'label'          => $label,
-            'tree'           => $tree,
-            'TAMpath'        => $TAMpath,
-            'urlAJAX'        => $urlAJAX,
-            'jsimp'          => $jsImp,
-        ]);
-    }
-
-    /**
-     * Transfer the Gedcom to the client side via AJAX-call
-     *
-     * @param string $route    this route ...
-     * @param string $actKey    Key for access to session-stored gedcom
-     * @param string $q    Key for access to session-stored gedcom
-     * 
-     * @return string
-     */
-    public function getGedcomAction(ServerRequestInterface $request): ResponseInterface
-    {
-        $params = (array) $request->getQueryParams();
-        $actKey = $params['actKey'] ?? '';
-        
-        $gedKey = Session::get($actKey);
-        $theGedcom = Session::get($gedKey);
-        $encodedString = json_decode($theGedcom);
-
-        return response($encodedString);
-    }
-    /**
-     * delete all records in the clippings cart or delete a set grouped by type of records
-     *
-     * @param ServerRequestInterface $request
-     *
-     * @return ResponseInterface
      */
     public function getEmptyAction(ServerRequestInterface $request): ResponseInterface
     {

@@ -59,7 +59,7 @@ This section documents installation instructions for this module.
 <a name="upgrade"></a>
 ## Upgrade
 
-To update simply replace the huhwt-cce30 files
+To update simply replace the huhwt-cce20 files
 with the new ones from the latest release.
 
 <a name="translation"></a>
