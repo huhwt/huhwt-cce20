@@ -18,6 +18,16 @@ back to webtrees-2.0.
 
 For features and background of this module please have a look at the above given link.
 
+All features of the original version have been taken over. Own additions extend the management of the records collected in the cart by targeted deletion of entire subgroups and in the display panel the ability to fold and unfold subgroups by clicking on the group heading.
+
+A special feature is the option to export selected records not only in Gedcom format - zipped or plain text - but also to pass them directly to visualization tools. Currently the direct connection of TAM is implemented, further tools will follow.
+
+TAM stands for 'Topographic Attribute Maps' and is a node-link diagram underlaid with a contour line-like representation of temporal references. The tool was developed at the University of Graz, you can find a demo at https://github.com/rpreiner/tam, its background is documented here: https://diglib.eg.org/handle/10.1111/cgf13987.
+
+The tool can be found at https://github.com/huhwt/huhwt-wttam. It has to be installed separately in Webtrees.
+
+Translated with www.DeepL.com/Translator (free version)
+
 ## Contents
 This Readme contains the following main sections
 
