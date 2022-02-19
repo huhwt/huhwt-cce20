@@ -82,6 +82,8 @@ Updated translations will be included in the next release of this module.
 
 There are now, beside English and German, no other translations available.
 
+Special thanks to TheDutchJewel for the translation into Dutch.
+
 <a name="support"></a>
 ## Support
 
