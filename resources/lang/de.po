@@ -89,6 +89,24 @@ msgstr "Personen"
 msgid "CCE-Family"
 msgstr "Familien"
 
+msgid "CCE-Media"
+msgstr "Medien-Dateien"
+
+msgid "CCE-Location"
+msgstr "Ortsangaben"
+
+msgid "CCE-Note"
+msgstr "Notizen"
+
+msgid "CCE-Repository"
+msgstr "Datenspeicher"
+
+msgid "CCE-Source"
+msgstr "Quellen-Verzeichnis"
+
+msgid "CCE-Submitter"
+msgstr "Einsender"
+
 msgid "Delete all records, a set of records of the same type, or selected records"
 msgstr "Löschen aller Datensätze insgesamt, oder aller eines Typs, oder nach Auswahl"
 

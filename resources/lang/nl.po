@@ -91,6 +91,24 @@ msgstr "CCE-Persoon"
 msgid "CCE-Family"
 msgstr "CCE-Gezin"
 
+msgid "CCE-Media"
+msgstr "CCE-Media"
+
+msgid "CCE-Location"
+msgstr "CCE-Locatie"
+
+msgid "CCE-Note"
+msgstr "CCE-Notitie"
+
+msgid "CCE-Repository"
+msgstr "CCE-Opslagplaats"
+
+msgid "CCE-Source"
+msgstr "CCE-Bron"
+
+msgid "CCE-Submitter"
+msgstr "CCE-Indiener"
+
 msgid "Delete all records, a set of records of the same type, or selected records"
 msgstr "Verwijder alle records, een set van records van hetzelfde type of geselecteerde records"
 
